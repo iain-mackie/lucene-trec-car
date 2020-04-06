@@ -29,6 +29,6 @@ RUN wget --no-verbose -O /tmp/apache-maven-3.3.9-bin.tar.gz http://www-eu.apache
 ENV MAVEN_HOME /opt/maven
 
 # Install & build Lucene for TREC CAR
-RUN git clone https://github.com/laura-dietz/trec-car-methods
-WORKDIR trec-car-methods
+RUN git clone https://github.com/iain-mackie/lucene-trec-car
+WORKDIR trec-car-methods/trec-car-methods
 RUN mvn compile assembly:single
