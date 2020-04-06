@@ -1,0 +1,42 @@
+######################
+Commands to run to make files read/write
+
+- end of scripts groupwrite permissons (run chmod -R 775 *)
+- copy scp (chmod -R 775 * && chgrp -R nfsnobody *)
+
+
+serviceAccount: containerroot
+
+######################
+OpenShift: iainmackie/lucene-trec-car-index:v2
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: lucene-trec-car-index
+  namespace: imackieproject
+spec:
+  volumes:
+  - name: nfs-access
+    persistentVolumeClaim:
+      claimName: imackievol1claim
+  containers:
+  - env:
+    - name: INPUT
+      value: /nfs/trec_car/data/pages/unprocessedAllButBenchmark.Y2.cbor
+    - name: INDEX
+      value: /nfs/trec_car/index/anserini_pages/lucene-index.car17v2.0.pagesv2
+    name: lucene-trec-car-index-container
+    image: iainmackie/lucene-trec-car-index:v4
+    imagePullPolicy: IfNotPresent
+    resources:
+      requests:
+        cpu: "2000m"
+        memory: "12Gi"
+      limits:
+        cpu: "16000m"
+        memory: "128Gi"
+    volumeMounts:
+    - mountPath: /nfs/
+      name: nfs-access
+  restartPolicy: Never
