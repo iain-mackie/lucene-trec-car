@@ -30,5 +30,5 @@ ENV MAVEN_HOME /opt/maven
 
 # Install & build Lucene for TREC CAR
 RUN git clone https://github.com/iain-mackie/lucene-trec-car
-WORKDIR trec-car-methods/trec-car-methods
+WORKDIR lucene-trec-car/trec-car-methods/
 RUN mvn compile assembly:single
