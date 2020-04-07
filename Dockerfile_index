@@ -1,4 +1,4 @@
-FROM iainmackie/lucene-trec-car:v2
+FROM iainmackie/lucene-trec-car:v3
 
 # RUN
 CMD java -jar ./target/trec-car-methods-0.15-jar-with-dependencies.jar page ${INPUT} ${INDEX} edu.unh.cs.lucene.TrecCarLuceneIndexer
